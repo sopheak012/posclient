@@ -1,0 +1,42 @@
+/* CreateDrink.module.css */
+
+.container {
+  padding: 16px;
+}
+
+h2 {
+  font-size: 24px;
+  margin-bottom: 16px;
+}
+
+h3 {
+  font-size: 18px;
+  margin-bottom: 8px;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+li {
+  margin-bottom: 8px;
+}
+
+button {
+  font-size: 16px;
+  padding: 8px 16px;
+  background-color: #ea7c69; /* Updated color */
+  color: #fff; /* Updated text color */
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #d76857; /* Updated hover color */
+}
+
+button:active {
+  background-color: #c65949; /* Updated active color */
+}

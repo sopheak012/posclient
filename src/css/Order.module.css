@@ -1,0 +1,53 @@
+.orderContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: #ffffff;
+  padding: 20px;
+}
+
+.orderContent {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  margin-top: 20px;
+}
+
+.createPizza,
+.createDrink {
+  width: 45%;
+}
+
+.orderSummary {
+  width: 45%;
+  background-color: #292737;
+  padding: 20px;
+}
+
+.orderSummary h2 {
+  margin-bottom: 10px;
+}
+
+.orderSummary ul {
+  list-style: none;
+  padding: 0;
+}
+
+.orderSummary li {
+  margin-bottom: 5px;
+}
+
+.orderSummary button {
+  margin-top: 10px;
+  padding: 8px 16px;
+  background-color: #ea7c69;
+  color: #ffffff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.orderSummary button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}

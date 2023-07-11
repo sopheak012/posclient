@@ -1,0 +1,79 @@
+.orderSummaryContainer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  background-color: #1f1d2b;
+  color: #ffffff;
+  padding: 20px;
+  width: 300px; /* Adjust the width as needed */
+  height: 100vh; /* Set the height to cover the entire viewport */
+  overflow-y: auto; /* Add scroll when content exceeds the available height */
+}
+
+.orderSummaryContent {
+  display: flex;
+  flex-direction: column;
+}
+
+.selectedItems {
+  margin-top: 20px;
+}
+
+.selectedItems p {
+  font-weight: bold;
+}
+
+.orderItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.itemName {
+  flex: 2;
+  word-wrap: break-word;
+}
+
+.itemDetails {
+  display: flex;
+  align-items: center;
+}
+
+.price {
+  flex: 1;
+  text-align: right;
+}
+
+.deleteIcon {
+  color: #ffffff;
+  cursor: pointer;
+  margin-left: 10px;
+}
+
+.subtotal {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin-top: 20px;
+  font-weight: bold;
+}
+
+.subtotal span:first-child {
+  margin-right: 10px;
+}
+
+.submitButton {
+  margin-top: 20px;
+  padding: 8px 16px;
+  background-color: #ea7c69;
+  color: #ffffff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.submitButton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}

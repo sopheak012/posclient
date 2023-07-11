@@ -5,7 +5,9 @@ import Todos from "./pages/Todos";
 import Dashboard from "./pages/Dashboard";
 import NavBar from "./components/NavBar";
 import Login from "./pages/Login";
-import "./app.css";
+import Signup from "./pages/Signup";
+import Order from "./pages/Order";
+import "./App.css";
 
 const App = () => {
   return (
@@ -17,6 +19,8 @@ const App = () => {
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/todos" element={<Todos />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<Signup />} />
+          <Route path="/order" element={<Order />} />
         </Routes>
       </div>
     </Router>
