@@ -1,13 +1,14 @@
 .orderSummaryContainer {
-  position: fixed;
-  top: 0;
-  right: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
   background-color: #1f1d2b;
   color: #ffffff;
   padding: 20px;
   width: 300px; /* Adjust the width as needed */
   height: 100vh; /* Set the height to cover the entire viewport */
   overflow-y: auto; /* Add scroll when content exceeds the available height */
+  margin-left: auto; /* Push the container to the right side */
 }
 
 .orderSummaryContent {
