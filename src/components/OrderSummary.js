@@ -14,6 +14,7 @@ const OrderSummary = () => {
 
   const [submitted, setSubmitted] = useState(false);
   const [subtotal, setSubtotal] = useState(0);
+  const token = useSelector((state) => state.user.token);
 
   useEffect(() => {
     updateSubtotal();
@@ -34,7 +35,12 @@ const OrderSummary = () => {
     try {
       const response = await axios.post(
         "http://localhost:4000/api/orders",
-        orderData
+        orderData,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
       );
       console.log("Order submitted successfully:", response.data);
 

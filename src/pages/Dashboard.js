@@ -21,7 +21,17 @@ const Dashboard = () => {
 
   const fetchOrders = async () => {
     try {
-      const response = await axios.get("http://localhost:4000/api/orders");
+      const userInfo = JSON.parse(localStorage.getItem("userInfo"));
+      const token = userInfo.token;
+      const config = {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      };
+      const response = await axios.get(
+        "http://localhost:4000/api/orders",
+        config
+      );
       const fetchedOrders = response.data;
       setOrders(fetchedOrders);
     } catch (error) {
