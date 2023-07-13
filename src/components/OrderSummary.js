@@ -8,7 +8,7 @@ import { resetDrinks, deleteDrink } from "../features/drinkSlice";
 import styles from "../css/OrderSummary.module.css";
 
 const OrderSummary = () => {
-  const pizzas = useSelector((state) => state.pizza.pizzas);
+  const pizzas = useSelector((state) => state.pizza);
   const drinks = useSelector((state) => state.drink);
   const dispatch = useDispatch();
 
@@ -26,7 +26,7 @@ const OrderSummary = () => {
         price: pizza.price,
       })),
       drinks: drinks.map((drink) => ({
-        drink: drink.name,
+        name: drink.name,
         price: drink.price,
       })),
     };

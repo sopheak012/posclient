@@ -134,7 +134,14 @@ const Login = () => {
       const { username, email: responseEmail, token } = response.data;
 
       // Dispatch the login action
-      dispatch(login({ username, email: responseEmail, token }));
+      dispatch(
+        login({
+          username,
+          email: responseEmail,
+          token,
+          isLogin: true,
+        })
+      );
 
       // Clear the form fields
       setEmail("");
