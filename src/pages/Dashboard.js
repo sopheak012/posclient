@@ -101,7 +101,7 @@ const Dashboard = () => {
                   {order.drinks
                     .reduce((acc, drink) => {
                       const existingDrink = acc.find(
-                        (item) => item.drink === drink.drink
+                        (item) => item.name === drink.name
                       );
                       if (existingDrink) {
                         existingDrink.quantity += 1;
@@ -112,7 +112,7 @@ const Dashboard = () => {
                     }, [])
                     .map((drink, index) => (
                       <li key={index} className={styles.drinkItem}>
-                        {drink.drink} x{drink.quantity}
+                        {drink.name} x{drink.quantity}
                       </li>
                     ))}
                 </ul>

@@ -26,7 +26,7 @@ const pizzaSlice = createSlice({
       state.push(newPizza);
     },
     removePizza: (state, action) => {
-      state = state.filter((pizza) => pizza.id !== action.payload);
+      return state.filter((pizza) => pizza.id !== action.payload);
     },
     updatePizza: (state, action) => {
       const { id, toppings } = action.payload;
@@ -36,8 +36,8 @@ const pizzaSlice = createSlice({
         pizza.price = calculatePrice(toppings);
       }
     },
-    resetPizzas: (state) => {
-      state = [];
+    resetPizzas: () => {
+      return initialState;
     },
   },
 });

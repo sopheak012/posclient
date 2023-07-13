@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { useDispatch } from "react-redux";
 import { login } from "../features/userSlice";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const CenteredContainer = styled.div`
   display: flex;
@@ -107,6 +108,7 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
@@ -146,6 +148,8 @@ const Login = () => {
       // Clear the form fields
       setEmail("");
       setPassword("");
+      //navigate the user to the order page
+      navigate("/order");
     } catch (error) {
       setError(error.response.data.error);
       console.error(error);
