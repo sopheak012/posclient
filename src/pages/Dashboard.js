@@ -23,9 +23,11 @@ const Dashboard = () => {
     try {
       const userInfo = JSON.parse(localStorage.getItem("userInfo"));
       const token = userInfo.token;
+      const username = userInfo.username; // Get the username from the user info
       const config = {
         headers: {
           Authorization: `Bearer ${token}`,
+          username: username, // Add the username to the request header
         },
       };
       const response = await axios.get(

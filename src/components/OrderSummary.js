@@ -33,12 +33,16 @@ const OrderSummary = () => {
     };
 
     try {
+      const userInfo = JSON.parse(localStorage.getItem("userInfo"));
+      const token = userInfo.token;
+      const username = userInfo.username; // Get the username from the user info
       const response = await axios.post(
         "http://localhost:4000/api/orders",
         orderData,
         {
           headers: {
             Authorization: `Bearer ${token}`,
+            username: username, // Add the username to the request header
           },
         }
       );
