@@ -1,29 +1,45 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
+import SignOut from "./SignOut";
 import "./NavBar.css";
 
 const NavBar = () => {
+  const user = useSelector((state) => state.user);
+  const isLoggedIn = user.isLogin;
+
   return (
     <nav className="navbar">
       <ul>
         <li>
           <Link to="/">Home</Link>
         </li>
-        <li>
-          <Link to="/dashboard">Dashboard</Link>
-        </li>
-        <li>
-          <Link to="/todos">Todos</Link>
-        </li>
-        <li>
-          <Link to="/order">Order</Link>
-        </li>
-        <li>
-          <Link to="/login">Login</Link>
-        </li>
-        <li>
-          <Link to="/signup">Sign Up</Link>
-        </li>
+        {isLoggedIn && (
+          <>
+            <li>
+              <Link to="/dashboard">Dashboard</Link>
+            </li>
+            <li>
+              <Link to="/todos">Todos</Link>
+            </li>
+            <li>
+              <Link to="/order">Order</Link>
+            </li>
+            <li>
+              <SignOut />
+            </li>
+          </>
+        )}
+        {!isLoggedIn && (
+          <>
+            <li>
+              <Link to="/login">Login</Link>
+            </li>
+            <li>
+              <Link to="/signup">Sign Up</Link>
+            </li>
+          </>
+        )}
       </ul>
     </nav>
   );
