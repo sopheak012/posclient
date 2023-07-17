@@ -7,6 +7,7 @@ import "./NavBar.css";
 const NavBar = () => {
   const user = useSelector((state) => state.user);
   const isLoggedIn = user.isLogin;
+  const username = user.username;
 
   return (
     <nav className="navbar">
@@ -24,6 +25,9 @@ const NavBar = () => {
             </li>
             <li>
               <Link to="/order">Order</Link>
+            </li>
+            <li>
+              <span className="username">Welcome, {username}!</span>
             </li>
             <li>
               <SignOut />

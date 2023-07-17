@@ -1,4 +1,5 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 const WelcomeContainer = styled.div`
@@ -30,7 +31,12 @@ const StartButton = styled.button`
   cursor: pointer;
 `;
 
-const HomePage = ({ onStartButtonClick }) => {
+const HomePage = () => {
+  const navigate = useNavigate();
+
+  const handleStart = () => {
+    navigate("/order");
+  };
   return (
     <WelcomeContainer>
       <Title>Welcome to Pizza POS System</Title>
@@ -38,7 +44,7 @@ const HomePage = ({ onStartButtonClick }) => {
         Manage your pizza orders, track inventory, and streamline your pizza
         business with our powerful POS system.
       </Description>
-      <StartButton onClick={onStartButtonClick}>Get Started</StartButton>
+      <StartButton onClick={handleStart}>Get Started</StartButton>
     </WelcomeContainer>
   );
 };

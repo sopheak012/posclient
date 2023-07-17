@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { useDispatch } from "react-redux";
 import { signup } from "../features/userSlice";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const CenteredContainer = styled.div`
   display: flex;
@@ -117,6 +118,7 @@ const Signup = () => {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleUsernameChange = (e) => {
     setUsername(e.target.value);
@@ -161,6 +163,9 @@ const Signup = () => {
       setUsername("");
       setEmail("");
       setPassword("");
+
+      //navigate user to order page when sign up
+      navigate("/order");
     } catch (error) {
       setError(error.response.data.error);
       console.error(error);
