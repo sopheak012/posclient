@@ -1,0 +1,39 @@
+/* Overview.module.css */
+
+.homePageContainer {
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.overviewData {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+
+.overviewData div {
+  border: 1px solid #ddd;
+  padding: 10px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.overviewData p:first-child {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.loading {
+  text-align: center;
+}
+
+/* Center the entire component */
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}

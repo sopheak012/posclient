@@ -18,6 +18,9 @@ const NavBar = () => {
         {isLoggedIn && (
           <>
             <li>
+              <Link to="/overview">Overview</Link>
+            </li>
+            <li>
               <Link to="/dashboard">Dashboard</Link>
             </li>
             <li>

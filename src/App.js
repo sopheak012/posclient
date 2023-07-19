@@ -5,15 +5,17 @@ import {
   Routes,
   Navigate,
 } from "react-router-dom";
+import "./App.css";
 import HomePage from "./pages/HomePage";
 import Todos from "./pages/Todos";
 import Dashboard from "./pages/Dashboard";
-import NavBar from "./components/NavBar";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import Order from "./pages/Order";
+import Overview from "./pages/Overview";
+
+import NavBar from "./components/NavBar";
 import ProtectedRoutes from "./components/ProtectedRoutes";
-import "./App.css";
 
 const App = () => {
   return (
@@ -23,6 +25,7 @@ const App = () => {
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route element={<ProtectedRoutes />}>
+            <Route path="/overview" element={<Overview />} />
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/todos" element={<Todos />} />
             <Route path="/order" element={<Order />} />
