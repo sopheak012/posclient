@@ -140,7 +140,7 @@ const Signup = () => {
 
       // Make the API request
       const response = await axios.post(
-        "http://localhost:4000/api/users/signup",
+        "https://pos-api-2ta4.onrender.com/api/users/signup",
         {
           username,
           email,
