@@ -117,6 +117,7 @@ const Signup = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false); // New state for loading indicator
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -137,6 +138,7 @@ const Signup = () => {
 
     try {
       setError(""); // Clear any previous errors
+      setLoading(true); // Show loading indicator while making the API request
 
       // Make the API request
       const response = await axios.post(
@@ -163,11 +165,13 @@ const Signup = () => {
       setUsername("");
       setEmail("");
       setPassword("");
+      setLoading(false); // Hide loading indicator after the API request is complete
 
-      //navigate user to order page when sign up
+      // Navigate user to order page when sign up
       navigate("/order");
     } catch (error) {
       setError(error.response.data.error);
+      setLoading(false); // Hide loading indicator in case of an error
       console.error(error);
     }
   };
@@ -196,8 +200,8 @@ const Signup = () => {
             value={password}
             onChange={handlePasswordChange}
           />
-          <Button type="submit" onClick={handleSubmit}>
-            Sign Up
+          <Button type="submit" onClick={handleSubmit} disabled={loading}>
+            {loading ? <span>Loading...</span> : <span>Sign Up</span>}
           </Button>
         </FormContent>
         <SignupMessage>

@@ -107,6 +107,7 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false); // New state for loading indicator
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -123,6 +124,7 @@ const Login = () => {
 
     try {
       setError(""); // Clear any previous errors
+      setLoading(true); // Show loading indicator while making the API request
 
       // Make the API request
       const response = await axios.post(
@@ -148,10 +150,12 @@ const Login = () => {
       // Clear the form fields
       setEmail("");
       setPassword("");
-      //navigate the user to the order page
+      setLoading(false); // Hide loading indicator after the API request is complete
+      // Navigate the user to the order page
       navigate("/order");
     } catch (error) {
       setError(error.response.data.error);
+      setLoading(false); // Hide loading indicator in case of an error
       console.error(error);
     }
   };
@@ -176,8 +180,8 @@ const Login = () => {
             value={password}
             onChange={handlePasswordChange}
           />
-          <Button type="submit" onClick={handleSubmit}>
-            Log in
+          <Button type="submit" onClick={handleSubmit} disabled={loading}>
+            {loading ? <span>Loading...</span> : <span>Log in</span>}
           </Button>
         </FormContent>
         <SignupMessage>

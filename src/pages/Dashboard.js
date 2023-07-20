@@ -5,6 +5,7 @@ import styles from "../css/Dashboard.module.css";
 
 const Dashboard = () => {
   const [orders, setOrders] = useState([]);
+  const [loading, setLoading] = useState(true); // State to track loading status
 
   useEffect(() => {
     // Fetch all orders when the component mounts
@@ -36,8 +37,10 @@ const Dashboard = () => {
       );
       const fetchedOrders = response.data;
       setOrders(fetchedOrders);
+      setLoading(false); // Set loading to false once the data is fetched
     } catch (error) {
       console.error("Error fetching orders:", error);
+      setLoading(false); // Set loading to false on error as well
       // Handle error scenarios or display an error message to the user
     }
   };
@@ -76,7 +79,9 @@ const Dashboard = () => {
   return (
     <div className={styles.dashboardContainer}>
       <h2>Order List</h2>
-      {sortedOrders.length > 0 ? (
+      {loading ? (
+        <p>Loading...</p>
+      ) : sortedOrders.length > 0 ? (
         <ul className={styles.orderList}>
           {sortedOrders.map((order) => (
             <li key={order._id} className={styles.orderItem}>

@@ -14,6 +14,7 @@ const OrderSummary = () => {
 
   const [submitted, setSubmitted] = useState(false);
   const [subtotal, setSubtotal] = useState(0);
+  const [loading, setLoading] = useState(false); // State to track loading status
   const token = useSelector((state) => state.user.token);
 
   useEffect(() => {
@@ -21,6 +22,8 @@ const OrderSummary = () => {
   }, [pizzas, drinks]);
 
   const handleSubmitOrder = async () => {
+    setLoading(true); // Set loading to true when the order is being submitted
+
     const orderData = {
       pizzas: pizzas.map((pizza) => ({
         toppings: pizza.toppings,
@@ -58,6 +61,8 @@ const OrderSummary = () => {
     } catch (error) {
       console.error("Error submitting order:", error);
       // Handle error scenarios or display an error message to the user
+    } finally {
+      setLoading(false); // Set loading to false once the order submission is complete (success or failure)
     }
   };
 
@@ -159,9 +164,10 @@ const OrderSummary = () => {
       <button
         className={styles.submitButton}
         onClick={handleSubmitOrder}
-        disabled={pizzas.length === 0}
+        disabled={pizzas.length === 0 || loading} // Disable the button while loading
       >
-        Submit Order
+        {loading ? "Submitting..." : "Submit Order"}{" "}
+        {/* Display "Submitting..." while loading */}
       </button>
     </div>
   );
