@@ -21,7 +21,7 @@ const Overview = () => {
         },
       };
       const response = await axios.get(
-        "https://pos-api-2ta4.onrender.com/api/home",
+        "http://localhost:4000/api/home",
         config
       );
       const todayOverview = response.data;

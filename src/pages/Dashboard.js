@@ -6,13 +6,17 @@ import styles from "../css/Dashboard.module.css";
 const Dashboard = () => {
   const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(true); // State to track loading status
+  const userInfo = JSON.parse(localStorage.getItem("userInfo"));
 
   useEffect(() => {
     // Fetch all orders when the component mounts
     fetchOrders();
 
-    // Listen for the "orderUpdated" socket event
-    socket.on("orderUpdated", handleOrderUpdated);
+    socket.emit("joinRoom", userInfo.username);
+    socket.on("orderUpdated", () => {
+      console.log("Received orderUpdated event:");
+      fetchOrders();
+    });
 
     // Clean up the event listener when the component unmounts
     return () => {
@@ -22,7 +26,6 @@ const Dashboard = () => {
 
   const fetchOrders = async () => {
     try {
-      const userInfo = JSON.parse(localStorage.getItem("userInfo"));
       const token = userInfo.token;
       const username = userInfo.username; // Get the username from the user info
       const config = {
@@ -32,7 +35,7 @@ const Dashboard = () => {
         },
       };
       const response = await axios.get(
-        "https://pos-api-2ta4.onrender.com/api/orders",
+        "http://localhost:4000/api/orders",
         config
       );
       const fetchedOrders = response.data;

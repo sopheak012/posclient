@@ -15,7 +15,6 @@ const OrderSummary = () => {
   const [submitted, setSubmitted] = useState(false);
   const [subtotal, setSubtotal] = useState(0);
   const [loading, setLoading] = useState(false); // State to track loading status
-  const token = useSelector((state) => state.user.token);
 
   useEffect(() => {
     updateSubtotal();
@@ -40,7 +39,7 @@ const OrderSummary = () => {
       const token = userInfo.token;
       const username = userInfo.username; // Get the username from the user info
       const response = await axios.post(
-        "https://pos-api-2ta4.onrender.com/api/orders",
+        "http://localhost:4000/api/orders",
         orderData,
         {
           headers: {
@@ -51,7 +50,8 @@ const OrderSummary = () => {
       );
       console.log("Order submitted successfully:", response.data);
 
-      socket.emit("orderSubmitted", response.data);
+      //send data to socket to update user
+      socket.emit("orderSubmitted", username);
 
       // Reset the Redux state
       dispatch(resetPizzas());
