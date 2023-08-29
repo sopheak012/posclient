@@ -2,21 +2,27 @@
 
 .container {
   padding: 16px;
+  text-align: center;
 }
 
 h2 {
   font-size: 24px;
   margin-bottom: 16px;
+  color: #fff; /* White text color */
 }
 
 h3 {
   font-size: 18px;
   margin-bottom: 8px;
+  color: #fff; /* Slightly darker text color */
 }
 
 ul {
   list-style-type: none;
   padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 16px; /* Increased gap for spacing between buttons */
 }
 
 li {
@@ -25,18 +31,20 @@ li {
 
 button {
   font-size: 16px;
-  padding: 8px 16px;
-  background-color: #ea7c69; /* Updated color */
-  color: #fff; /* Updated text color */
+  padding: 12px 20px; /* Equal padding for all buttons */
+  background-color: #ff5733; /* Coral color for buttons */
+  color: #fff; /* White text color */
   border: none;
   border-radius: 4px;
   cursor: pointer;
+  transition: background-color 0.3s ease;
+  width: 100%; /* Make all buttons the same width */
 }
 
 button:hover {
-  background-color: #d76857; /* Updated hover color */
+  background-color: #ff704d; /* Slightly lighter coral for hover effect */
 }
 
 button:active {
-  background-color: #c65949; /* Updated active color */
+  background-color: #e64a33; /* Darker coral for active effect */
 }

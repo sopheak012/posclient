@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { addPizza } from "../features/pizzaSlice";
+import styles from "../css/CreatePizza.module.css"; // Import the CSS module
 
 const CreatePizza = () => {
   const [selectedToppings, setSelectedToppings] = useState([]);
@@ -35,34 +36,50 @@ const CreatePizza = () => {
   };
 
   return (
-    <div className="create-pizza-container">
+    <div className={styles.create_pizza_container}>
       <h2>Create Pizza</h2>
-      <div className="toppings-container">
+      <div className={styles.toppings_container}>
         <button
           onClick={() => handleToppingSelection("Pepperoni")}
-          className={selectedToppings.includes("Pepperoni") ? "active" : ""}
+          className={
+            selectedToppings.includes("Pepperoni") ? styles.active : ""
+          }
         >
           Pepperoni
         </button>
         <button
           onClick={() => handleToppingSelection("Sausage")}
-          className={selectedToppings.includes("Sausage") ? "active" : ""}
+          className={selectedToppings.includes("Sausage") ? styles.active : ""}
         >
           Sausage
         </button>
         <button
           onClick={() => handleToppingSelection("Pineapple")}
-          className={selectedToppings.includes("Pineapple") ? "active" : ""}
+          className={
+            selectedToppings.includes("Pineapple") ? styles.active : ""
+          }
         >
           Pineapple
         </button>
+        <button
+          onClick={() => handleToppingSelection("Mushroom")}
+          className={selectedToppings.includes("Mushroom") ? styles.active : ""}
+        >
+          Mushroom
+        </button>
+        <button
+          onClick={() => handleToppingSelection("Bacon")}
+          className={selectedToppings.includes("Bacon") ? styles.active : ""}
+        >
+          Bacon
+        </button>
         {/* Add more buttons for other toppings */}
       </div>
-      <div className="selected-toppings-container">
+      <div className={styles.selected_toppings_container}>
         <p>Selected Toppings: {selectedToppings.join(", ")}</p>
         <button
           onClick={() => handleSubmit(selectedToppings)}
-          className="primary-button"
+          className={styles.primary_button}
         >
           Add to Order
         </button>

@@ -1,7 +1,7 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 import { addDrink } from "../features/drinkSlice";
-import styles from "../css/CreateDrink.module.css";
+import styles from "../css/CreateDrink.module.css"; // Import the CSS module
 
 const CreateDrink = () => {
   const dispatch = useDispatch();

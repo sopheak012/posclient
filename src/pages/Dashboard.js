@@ -5,11 +5,10 @@ import styles from "../css/Dashboard.module.css";
 
 const Dashboard = () => {
   const [orders, setOrders] = useState([]);
-  const [loading, setLoading] = useState(true); // State to track loading status
+  const [loading, setLoading] = useState(true);
   const userInfo = JSON.parse(localStorage.getItem("userInfo"));
 
   useEffect(() => {
-    // Fetch all orders when the component mounts
     fetchOrders();
 
     socket.emit("joinRoom", userInfo.username);
@@ -18,7 +17,6 @@ const Dashboard = () => {
       fetchOrders();
     });
 
-    // Clean up the event listener when the component unmounts
     return () => {
       socket.off("orderUpdated", handleOrderUpdated);
     };
@@ -27,11 +25,11 @@ const Dashboard = () => {
   const fetchOrders = async () => {
     try {
       const token = userInfo.token;
-      const username = userInfo.username; // Get the username from the user info
+      const username = userInfo.username;
       const config = {
         headers: {
           Authorization: `Bearer ${token}`,
-          username: username, // Add the username to the request header
+          username: username,
         },
       };
       const response = await axios.get(
@@ -40,28 +38,24 @@ const Dashboard = () => {
       );
       const fetchedOrders = response.data;
       setOrders(fetchedOrders);
-      setLoading(false); // Set loading to false once the data is fetched
+      setLoading(false);
     } catch (error) {
       console.error("Error fetching orders:", error);
-      setLoading(false); // Set loading to false on error as well
-      // Handle error scenarios or display an error message to the user
+      setLoading(false);
     }
   };
 
   const handleOrderUpdated = (updatedOrder) => {
     setOrders((prevOrders) => {
-      // Find the index of the updated order in the array
       const orderIndex = prevOrders.findIndex(
         (order) => order._id === updatedOrder._id
       );
 
       if (orderIndex !== -1) {
-        // If the order exists, update it in the orders array
         const updatedOrders = [...prevOrders];
         updatedOrders[orderIndex] = updatedOrder;
         return updatedOrders;
       } else {
-        // If the order is new, add it to the beginning of the orders array
         return [updatedOrder, ...prevOrders];
       }
     });
@@ -94,48 +88,44 @@ const Dashboard = () => {
               </div>
               <div className={styles.pizzas}>
                 <div>Pizzas:</div>
-                <ul>
-                  {order.pizzas
-                    .reduce((acc, pizza) => {
-                      const existingPizza = acc.find(
-                        (item) =>
-                          item.toppings.join(", ") === pizza.toppings.join(", ")
-                      );
-                      if (existingPizza) {
-                        existingPizza.quantity += 1;
-                      } else {
-                        acc.push({ ...pizza, quantity: 1 });
-                      }
-                      return acc;
-                    }, [])
-                    .map((pizza, index) => (
-                      <li key={index} className={styles.pizzaItem}>
-                        {pizza.toppings.join(", ")} x{pizza.quantity}
-                      </li>
-                    ))}
-                </ul>
+                {order.pizzas
+                  .reduce((acc, pizza) => {
+                    const existingPizza = acc.find(
+                      (item) =>
+                        item.toppings.join(", ") === pizza.toppings.join(", ")
+                    );
+                    if (existingPizza) {
+                      existingPizza.quantity += 1;
+                    } else {
+                      acc.push({ ...pizza, quantity: 1 });
+                    }
+                    return acc;
+                  }, [])
+                  .map((pizza, index) => (
+                    <div key={index} className={styles.pizzaItem}>
+                      {pizza.quantity}x {pizza.toppings.join(", ")}
+                    </div>
+                  ))}
               </div>
               <div className={styles.drinks}>
                 <div>Drinks:</div>
-                <ul>
-                  {order.drinks
-                    .reduce((acc, drink) => {
-                      const existingDrink = acc.find(
-                        (item) => item.name === drink.name
-                      );
-                      if (existingDrink) {
-                        existingDrink.quantity += 1;
-                      } else {
-                        acc.push({ ...drink, quantity: 1 });
-                      }
-                      return acc;
-                    }, [])
-                    .map((drink, index) => (
-                      <li key={index} className={styles.drinkItem}>
-                        {drink.name} x{drink.quantity}
-                      </li>
-                    ))}
-                </ul>
+                {order.drinks
+                  .reduce((acc, drink) => {
+                    const existingDrink = acc.find(
+                      (item) => item.name === drink.name
+                    );
+                    if (existingDrink) {
+                      existingDrink.quantity += 1;
+                    } else {
+                      acc.push({ ...drink, quantity: 1 });
+                    }
+                    return acc;
+                  }, [])
+                  .map((drink, index) => (
+                    <div key={index} className={styles.drinkItem}>
+                      {drink.quantity}x {drink.name}
+                    </div>
+                  ))}
               </div>
             </li>
           ))}

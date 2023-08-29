@@ -8,6 +8,7 @@ const WelcomeContainer = styled.div`
   align-items: center;
   justify-content: center;
   height: 100vh;
+  margin-top: -50px;
 `;
 
 const Title = styled.h1`
@@ -29,6 +30,7 @@ const StartButton = styled.button`
   border-radius: 4px;
   margin-top: 24px;
   cursor: pointer;
+  width: auto;
 `;
 
 const HomePage = () => {

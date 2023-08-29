@@ -1,27 +1,30 @@
+/* Your OrderSummary.module.css */
+
 .orderSummaryContainer {
   display: flex;
   flex-direction: column;
-  align-items: flex-end;
   background-color: #1f1d2b;
   color: #ffffff;
   padding: 20px;
   width: 300px; /* Adjust the width as needed */
-  height: 100vh; /* Set the height to cover the entire viewport */
-  overflow-y: auto; /* Add scroll when content exceeds the available height */
-  margin-left: auto; /* Push the container to the right side */
+  max-height: 70vh; /* Set a maximum height to fit within 90% of the viewport height */
+  overflow-y: auto; /* Add scroll only if content exceeds the maximum height */
 }
 
 .orderSummaryContent {
   display: flex;
   flex-direction: column;
+  align-items: flex-start; /* Align items to the left */
 }
 
 .selectedItems {
   margin-top: 20px;
+  width: 100%; /* Make items take the full width */
 }
 
 .selectedItems p {
   font-weight: bold;
+  width: 100%; /* Make the bold label take the full width */
 }
 
 .orderItem {
@@ -50,6 +53,11 @@
   color: #ffffff;
   cursor: pointer;
   margin-left: 10px;
+  transition: color 0.3s ease; /* Add transition effect for color change */
+}
+
+.deleteIcon:hover {
+  color: #ff4444; /* Change color to red on hover */
 }
 
 .subtotal {
@@ -74,7 +82,22 @@
   cursor: pointer;
 }
 
+.submitButton:hover {
+  background-color: #4bc970;
+}
+
 .submitButton:disabled {
   opacity: 0.5;
   cursor: not-allowed;
+}
+
+.deleteIcon {
+  color: #ffffff;
+  cursor: pointer;
+  margin-left: 10px;
+  transition: color 0.3s ease; /* Add transition for color change */
+}
+
+.deleteIcon:hover {
+  color: #f95c41; /* Change color on hover */
 }

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { FaTrash } from "react-icons/fa";
 import axios from "axios";
@@ -12,16 +12,17 @@ const OrderSummary = () => {
   const drinks = useSelector((state) => state.drink);
   const dispatch = useDispatch();
 
-  const [submitted, setSubmitted] = useState(false);
-  const [subtotal, setSubtotal] = useState(0);
-  const [loading, setLoading] = useState(false); // State to track loading status
+  const [loading, setLoading] = useState(false);
+
+  const orderSummaryRef = useRef(null);
 
   useEffect(() => {
-    updateSubtotal();
+    // Scroll to the bottom when the component updates
+    orderSummaryRef.current.scrollTop = orderSummaryRef.current.scrollHeight;
   }, [pizzas, drinks]);
 
   const handleSubmitOrder = async () => {
-    setLoading(true); // Set loading to true when the order is being submitted
+    setLoading(true);
 
     const orderData = {
       pizzas: pizzas.map((pizza) => ({
@@ -37,70 +38,40 @@ const OrderSummary = () => {
     try {
       const userInfo = JSON.parse(localStorage.getItem("userInfo"));
       const token = userInfo.token;
-      const username = userInfo.username; // Get the username from the user info
+      const username = userInfo.username;
       const response = await axios.post(
         "http://localhost:4000/api/orders",
         orderData,
         {
           headers: {
             Authorization: `Bearer ${token}`,
-            username: username, // Add the username to the request header
+            username: username,
           },
         }
       );
       console.log("Order submitted successfully:", response.data);
 
-      //send data to socket to update user
       socket.emit("orderSubmitted", username);
 
-      // Reset the Redux state
       dispatch(resetPizzas());
       dispatch(resetDrinks());
-
-      setSubmitted(true);
     } catch (error) {
       console.error("Error submitting order:", error);
-      // Handle error scenarios or display an error message to the user
     } finally {
-      setLoading(false); // Set loading to false once the order submission is complete (success or failure)
+      setLoading(false);
     }
-  };
-
-  const handleResetOrder = () => {
-    setSubmitted(false);
-    dispatch(resetPizzas());
-    dispatch(resetDrinks());
   };
 
   const handleRemovePizza = (id) => {
     dispatch(removePizza(id));
-    updateSubtotal();
   };
 
   const handleRemoveDrink = (id) => {
     dispatch(deleteDrink(id));
-    updateSubtotal();
   };
-
-  const updateSubtotal = () => {
-    const newSubtotal =
-      pizzas.reduce((acc, pizza) => acc + (pizza.price || 0), 0) +
-      drinks.reduce((acc, drink) => acc + (drink.price || 0), 0);
-    setSubtotal(newSubtotal);
-  };
-
-  if (submitted) {
-    return (
-      <div className={styles.orderSubmitted}>
-        <h2>Order Submitted</h2>
-        <p>Thank you for your order!</p>
-        <button onClick={handleResetOrder}>Place Another Order</button>
-      </div>
-    );
-  }
 
   return (
-    <div className={styles.orderSummaryContainer}>
+    <div className={styles.orderSummaryContainer} ref={orderSummaryRef}>
       <h2>Order Summary</h2>
       <div className={styles.orderSummaryContent}>
         <div className={styles.selectedItems}>
@@ -121,7 +92,7 @@ const OrderSummary = () => {
                         className={styles.deleteIcon}
                         onClick={() => handleRemovePizza(pizza.id)}
                       >
-                        <FaTrash />
+                        <FaTrash className={styles.deleteIcon} />
                       </div>
                     </div>
                   </div>
@@ -145,7 +116,7 @@ const OrderSummary = () => {
                         className={styles.deleteIcon}
                         onClick={() => handleRemoveDrink(drink.id)}
                       >
-                        <FaTrash />
+                        <FaTrash className={styles.deleteIcon} />
                       </div>
                     </div>
                   </div>
@@ -157,17 +128,12 @@ const OrderSummary = () => {
           )}
         </div>
       </div>
-      <div className={styles.subtotal}>
-        <span>Subtotal:</span>
-        <span>${subtotal.toFixed(2)}</span>
-      </div>
       <button
         className={styles.submitButton}
         onClick={handleSubmitOrder}
-        disabled={pizzas.length === 0 || loading} // Disable the button while loading
+        disabled={pizzas.length === 0 || loading}
       >
-        {loading ? "Submitting..." : "Submit Order"}{" "}
-        {/* Display "Submitting..." while loading */}
+        {loading ? "Submitting..." : "Submit Order"}
       </button>
     </div>
   );

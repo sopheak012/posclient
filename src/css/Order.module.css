@@ -18,6 +18,16 @@
   width: 45%;
 }
 
+.orderSummaryContainer {
+  display: flex;
+  flex-direction: column;
+  background-color: #1f1d2b;
+  color: #ffffff;
+  padding: 20px;
+  flex-grow: 1; /* Take up available vertical space */
+  overflow-y: auto; /* Add scroll when content exceeds container height */
+}
+
 .orderSummary h2 {
   margin-bottom: 10px;
 }

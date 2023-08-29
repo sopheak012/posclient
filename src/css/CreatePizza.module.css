@@ -1,0 +1,73 @@
+/* CreatePizza.module.css */
+
+.create-pizza-container {
+  padding: 16px;
+  text-align: center;
+}
+
+h2 {
+  font-size: 24px;
+  margin-bottom: 16px;
+  color: #fff; /* White text color */
+}
+
+.toppings-container {
+  list-style-type: none;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap; /* Allow toppings to wrap to the next line */
+  gap: 8px; /* Adjust the gap between buttons */
+  justify-content: center;
+}
+
+/* Style for inactive toppings */
+button {
+  font-size: 16px;
+  padding: 12px 20px; /* Equal padding for all buttons */
+  background-color: #f95c41; /* Red-Orange color for buttons */
+  color: #fff; /* White text color */
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, border 0.3s ease; /* Add border transition */
+  width: auto; /* Allow buttons to adjust their width */
+  margin: 4px; /* Add spacing around buttons */
+  border: 2px solid transparent; /* Add transparent border initially */
+}
+
+/* Style for active toppings */
+button.active {
+  background-color: #f95633; /* Darker Red-Orange for active buttons */
+  border: 2px solid #fff; /* Add a white border for active buttons */
+}
+
+button:hover {
+  background-color: #f96a41; /* Slightly lighter Red-Orange for hover effect */
+}
+
+.selected-toppings-container {
+  margin-top: 20px;
+}
+
+.primary-button {
+  font-size: 16px;
+  padding: 12px 20px; /* Equal padding for all buttons */
+  background-color: #3498db; /* Blue color for primary button */
+  color: #fff; /* White text color */
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  width: 100%; /* Make all buttons the same width */
+  max-width: 200px; /* Limit maximum button width */
+  margin: 0 auto; /* Center the button horizontally */
+  display: block;
+}
+
+.primary-button:hover {
+  background-color: #2980b9; /* Darker blue for hover effect */
+}
+
+.primary-button:active {
+  background-color: #1f618d; /* Even darker blue for active effect */
+}
