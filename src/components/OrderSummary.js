@@ -42,7 +42,7 @@ const OrderSummary = () => {
       const token = userInfo.token;
       const username = userInfo.username;
       const response = await axios.post(
-        "http://localhost:4000/api/orders",
+        "https://pos-api-2ta4.onrender.com/api/orders",
         orderData,
         {
           headers: {

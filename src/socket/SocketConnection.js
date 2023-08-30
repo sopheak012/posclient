@@ -5,7 +5,7 @@ let socket;
 
 const SocketConnection = () => {
   useEffect(() => {
-    socket = io("http://localhost:4000");
+    socket = io("https://pos-api-2ta4.onrender.com");
 
     // Handle connection events
     socket.on("connect", () => {
