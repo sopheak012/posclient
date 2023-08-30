@@ -9,6 +9,7 @@
   width: 300px; /* Adjust the width as needed */
   max-height: 70vh; /* Set a maximum height to fit within 90% of the viewport height */
   overflow-y: auto; /* Add scroll only if content exceeds the maximum height */
+  overflow-x: hidden;
 }
 
 .orderSummaryContent {

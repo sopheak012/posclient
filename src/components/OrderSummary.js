@@ -13,12 +13,14 @@ const OrderSummary = () => {
   const dispatch = useDispatch();
 
   const [loading, setLoading] = useState(false);
+  const [subtotal, setSubtotal] = useState(0);
 
   const orderSummaryRef = useRef(null);
 
   useEffect(() => {
     // Scroll to the bottom when the component updates
     orderSummaryRef.current.scrollTop = orderSummaryRef.current.scrollHeight;
+    updateSubtotal(); // Update the subtotal when pizzas or drinks change
   }, [pizzas, drinks]);
 
   const handleSubmitOrder = async () => {
@@ -55,6 +57,7 @@ const OrderSummary = () => {
 
       dispatch(resetPizzas());
       dispatch(resetDrinks());
+      setSubtotal(0); // Reset subtotal after submitting the order
     } catch (error) {
       console.error("Error submitting order:", error);
     } finally {
@@ -68,6 +71,13 @@ const OrderSummary = () => {
 
   const handleRemoveDrink = (id) => {
     dispatch(deleteDrink(id));
+  };
+
+  const updateSubtotal = () => {
+    const newSubtotal =
+      pizzas.reduce((acc, pizza) => acc + (pizza.price || 0), 0) +
+      drinks.reduce((acc, drink) => acc + (drink.price || 0), 0);
+    setSubtotal(newSubtotal);
   };
 
   return (
@@ -127,6 +137,10 @@ const OrderSummary = () => {
             <p>No drinks in the order</p>
           )}
         </div>
+      </div>
+      <div className={styles.subtotal}>
+        <span>Subtotal:</span>
+        <span>${subtotal.toFixed(2)}</span>
       </div>
       <button
         className={styles.submitButton}
