@@ -160,6 +160,45 @@ const Login = () => {
     }
   };
 
+  const handleDemoLogin = async () => {
+    try {
+      setError(""); // Clear any previous errors
+      setLoading(true); // Show loading indicator while making the API request
+
+      // Make the API request for demo login
+      const response = await axios.post(
+        "https://pos-api-2ta4.onrender.com/api/users/login",
+        {
+          email: "demo@gmail.com",
+          password: "demopassword012@",
+        }
+      );
+
+      const { username, email: responseEmail, token } = response.data;
+
+      // Dispatch the login action
+      dispatch(
+        login({
+          username,
+          email: responseEmail,
+          token,
+          isLogin: true,
+        })
+      );
+
+      // Clear the form fields
+      setEmail("");
+      setPassword("");
+      setLoading(false); // Hide loading indicator after the API request is complete
+      // Navigate the user to the order page
+      navigate("/order");
+    } catch (error) {
+      setError(error.response.data.error);
+      setLoading(false); // Hide loading indicator in case of an error
+      console.error(error);
+    }
+  };
+
   return (
     <CenteredContainer>
       <LoginFormContainer>
@@ -182,6 +221,9 @@ const Login = () => {
           />
           <Button type="submit" onClick={handleSubmit} disabled={loading}>
             {loading ? <span>Loading...</span> : <span>Log in</span>}
+          </Button>
+          <Button onClick={handleDemoLogin} disabled={loading}>
+            {loading ? <span>Loading...</span> : <span>Demo Login</span>}
           </Button>
         </FormContent>
         <SignupMessage>
